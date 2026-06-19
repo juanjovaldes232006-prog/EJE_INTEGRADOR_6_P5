@@ -10,7 +10,7 @@ let options = {
 let triangles;
 
 function preload() {
- 
+
   faceMesh = ml5.faceMesh(options);
 }
 
@@ -46,12 +46,6 @@ function draw() {
       let pointC = face.keypoints[pointCIndex];
 
       noFill();
-<<<<<<< HEAD
-      stroke(0);
-      strokeWeight(0.25);
-      triangle(pointA.x, pointA.y, pointB.x, pointB.y, pointC.x, pointC.y);
-      circle(pointA.x,pointA.y,10);
-=======
       stroke(0, 0, 0);
       strokeWeight(0);
 
@@ -60,21 +54,35 @@ function draw() {
         pointB.x, pointB.y,
         pointC.x, pointC.y
       );
->>>>>>> a9f15f3a7978db6635eb581abfce779623af46d9
     }
+    let glabela = face.keypoints[168];
+    fill(255, 0, 0); // rojo
+    noStroke();
+    circle(glabela.x, glabela.y, 20);
+
+    let superiorDer = face.keypoints[386];
+    let inferiorDer = face.keypoints[374];
+    let ojoDerechoX = (superiorDer.x + inferiorDer.x) / 2;
+    let ojoDerechoY = (superiorDer.y + inferiorDer.y) / 2;
+    fill(0, 0, 255); // Color azul (puedes cambiarlo)
+    noStroke();
+    circle(ojoDerechoX, ojoDerechoY, 15);
+
 
     let nariz = face.keypoints[5];
 
     fill(255, 0, 0); // rojo
     noStroke();
     circle(nariz.x, nariz.y, 20);
+
+    let boca = face.keypoints[14];
+    if (boca) {
+      fill(0, 0, 255); // Azul para la boca
+      circle(boca.x, boca.y, 20);
+    }
   }
 }
 
 function gotFaces(results) {
-<<<<<<< HEAD
-  // Save the output to the faces variable s 
-=======
->>>>>>> a9f15f3a7978db6635eb581abfce779623af46d9
   faces = results;
 }
