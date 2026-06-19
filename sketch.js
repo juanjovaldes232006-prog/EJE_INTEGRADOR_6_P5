@@ -38,9 +38,10 @@ function draw() {
       let pointC = face.keypoints[pointCIndex];
 
       noFill();
-      stroke(0, 0, 255);
-      strokeWeight(1);
+      stroke(0);
+      strokeWeight(0.25);
       triangle(pointA.x, pointA.y, pointB.x, pointB.y, pointC.x, pointC.y);
+      circle(pointA.x,pointA.y,10);
     }
   }
 }
