@@ -6,20 +6,27 @@ let options = {
   refineLandmarks: false,
   flipHorizontal: false
 };
+let img;
+let img2;
+let img3;
 
 let triangles;
 
 function preload() {
 
+img = loadImage('/assets/ojo1.png');
+img2 = loadImage('/assets/pomulo1.png');
+img3 = loadImage('/assets/menton1.png');
   faceMesh = ml5.faceMesh(options);
 }
 
 function setup() {
-  createCanvas(640, 480);
+  createCanvas(1000, 1000);
+
 
 
   video = createCapture(VIDEO);
-  video.size(640, 480);
+  video.size(1000, 1000);
   video.hide();
 
   triangles = faceMesh.getTriangles();
@@ -28,7 +35,7 @@ function setup() {
 
 function draw() {
 
-  image(video, 0, 0, width, height);
+  image(video, 0, 0, 1000, 1000);
 
   for (let i = 0; i < faces.length; i++) {
 
@@ -58,15 +65,18 @@ function draw() {
     let glabela = face.keypoints[168];
     fill(255, 0, 0); // rojo
     noStroke();
-    circle(glabela.x, glabela.y, 20);
+    
+    //img(ojoDerechoX,ojoDerechoY,15);
 
-    let superiorDer = face.keypoints[386];
+    let superiorDer = face.keypoints[336];
     let inferiorDer = face.keypoints[374];
     let ojoDerechoX = (superiorDer.x + inferiorDer.x) / 2;
     let ojoDerechoY = (superiorDer.y + inferiorDer.y) / 2;
     fill(0, 0, 255); // Color azul (puedes cambiarlo)
     noStroke();
-    circle(ojoDerechoX, ojoDerechoY, 15);
+    image(img,ojoDerechoX, ojoDerechoY,100,40);
+    
+  //circle(ojoDerechoX, ojoDerechoY, 15);
 
 
     let nariz = face.keypoints[5];
@@ -79,6 +89,10 @@ function draw() {
     if (boca) {
       fill(0, 0, 255); // Azul para la boca
       circle(boca.x, boca.y, 20);
+
+      image(img,nariz.x,nariz.y,100,40);
+      image(img2,nariz.x,nariz.y,100,40);
+      image(img3,boca.x,boca.y,100,40);
     }
   }
 }
