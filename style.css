@@ -1,0 +1,36 @@
+body{
+margin: 0;
+overflow: hidden;
+background-color: #000;
+font-family: Impact, sans-serif;
+background-image: url(assets/5DB6C2F0-1294-4908-9244-A2E5B66ABCF0.png);
+}
+
+
+nav{
+position: fixed;
+inset: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 100;
+pointer-events: none;
+}
+
+nav a{
+pointer-events: auto;
+padding: 35px 45px;
+background: rgba(0,0,0,0.55);
+color: rgb(158, 149, 138);
+text-decoration: none;
+text-transform: uppercase;
+font-size: 90px;
+letter-spacing: 20px;
+line-height: 1.2;
+transition: .3s;
+}
+
+nav a:hover{
+background: white;
+color: rgb(0, 0, 0);
+}
