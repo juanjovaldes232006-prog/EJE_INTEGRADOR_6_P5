@@ -3,57 +3,9 @@ margin: 0;
 overflow: hidden;
 background-color: #000;
 font-family: Impact, sans-serif;
+background-image: url(assets/5DB6C2F0-1294-4908-9244-A2E5B66ABCF0.png);
 }
 
-.fondo{
-position: fixed;
-inset: 0;
-display: grid;
-grid-template-columns: repeat(6, 1fr);
-grid-auto-rows: 120px;
-grid-auto-flow: dense;
-gap: 6px;
-padding: 6px;
-z-index: 1;
-}
-
-.modelo{
-overflow: hidden;
-transition: 0.3s;
-}
-
-.modelo img{
-width: 100%;
-height: 100%;
-object-fit: cover;
-display: block;
-}
-
-.modelo:hover{
-transform: scale(1.03);
-border: 3px solid white;
-}
-
-.modelo:nth-child(3n){
-grid-row: span 2;
-}
-
-.modelo:nth-child(5n){
-grid-column: span 2;
-}
-
-.modelo:nth-child(8n){
-grid-column: span 2;
-grid-row: span 2;
-}
-
-.modelo:nth-child(11n){
-grid-row: span 3;
-}
-
-.modelo:nth-child(14n){
-grid-column: span 2;
-}
 
 nav{
 position: fixed;
