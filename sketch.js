@@ -6,6 +6,10 @@ let options = {
   refineLandmarks: false,
   flipHorizontal: false
 };
+let img;
+let img2;
+let img3;
+
 
 let ojoDer = [];
 let pomuloDer = [];
@@ -34,64 +38,25 @@ let fotofinal;
 
 function preload() {
 
-fuente= loadFont("assets/BebasNeue-Regular.ttf");
+img = loadImage('/assets/ojo1.png');
+img2 = loadImage('/assets/pomulo1.png');
+img3 = loadImage('/assets/menton1.png');
 
- ojoDer.push(loadImage("assets/ojoDer1.png"));
-  ojoDer.push(loadImage("assets/ojoDer2.png"));
- /* ojoDer.push(loadImage("assets/ojo3.png"));
-  ojoDer.push(loadImage("assets/ojo4.png"));
-  ojoDer.push(loadImage("assets/ojo5.png"));*/
-
-  pomuloDer.push(loadImage("assets/pomuloDer1.png"));
-  pomuloDer.push(loadImage("assets/pomuloDer2.png"));
-  /*pomuloDer.push(loadImage("assets/pomulo3.png"));
-  pomuloDer.push(loadImage("assets/pomulo4.png"));
-  pomuloDer.push(loadImage("assets/pomulo5.png"));*/
-
-  mentonDer.push(loadImage("assets/mentonDer1.png"));
-  mentonDer.push(loadImage("assets/mentonDer2.png"));
-  /*mentonDer.push(loadImage("assets/menton3.png"));
-  mentonDer.push(loadImage("assets/menton4.png"));
-  mentonDer.push(loadImage("assets/menton5.png"));*/
-
-  ojoIzq.push(loadImage("assets/ojoIzq1.png"));
-  ojoIzq.push(loadImage("assets/ojoIzq2.png"));
- /* ojoIzq.push(loadImage("assets/ojoIzq3.png"));
-  ojoIzq.push(loadImage("assets/ojoIzq4.png"));
-  ojoIzq.push(loadImage("assets/ojoIzq5.png"));*/
-
-  pomuloIzq.push(loadImage("assets/pomuloIzq1.png"));
-  pomuloIzq.push(loadImage("assets/pomuloIzq2.png"));
-  /*pomuloIzq.push(loadImage("assets/pomuloIzq3.png"));
-  pomuloIzq.push(loadImage("assets/pomuloIzq4.png"));
-  pomuloIzq.push(loadImage("assets/pomuloIzq5.png"));*/
-
-  mentonIzq.push(loadImage("assets/mentonIzq1.png"));
-  mentonIzq.push(loadImage("assets/mentonIzq2.png"));
-  /*mentonIzq.push(loadImage("assets/mentonIzq3.png"));
-  mentonIzq.push(loadImage("assets/mentonIzq4.png"));
-  mentonIzq.push(loadImage("assets/mentonIzq5.png")); */
-
-  // cargar imagenes de rasgos 
   faceMesh = ml5.faceMesh(options);
 }
 
 function setup() {
-  createCanvas(windowWidth,windowHeight);
+  createCanvas(1000, 1000);
 
 
 
   video = createCapture(VIDEO);
-  video.size (windowWidth,windowHeight);
+  video.size(1000, 1000);
+
   video.hide();
 
   triangles = faceMesh.getTriangles();
   faceMesh.detectStart(video, gotFaces);
-
-  boton = createButton("¿Listo?");
-boton.position(width/2,600);
-boton.mousePressed(finalizar);
-  
 }
 
 function draw() {
@@ -224,83 +189,47 @@ estado = 1;
 
 function gotFaces(results) {
   faces = results;
+
 }
 
-function mousePressed(){
+function draw() {
 
-    if(faces.length == 0) return;
+  image(video, 0, 0, width, height);
 
-    let face = faces[0];
+  for (let i = 0; i < faces.length; i++) {
 
-    let ojo1 = face.keypoints[9];
+    let face = faces[i];
+    for (let j = 0; j < triangles.length; j++) {
 
-    if(
-        mouseX > ojo1.x &&
-        mouseX < ojo1.x + 180 &&
-        mouseY > ojo1.y &&
-        mouseY < ojo1.y + 60
-    ){
+      let indices = triangles[j];
 
-        indiceOjoDer++;
+      let pointAIndex = indices[0];
+      let pointBIndex = indices[1];
+      let pointCIndex = indices[2];
 
-        if(indiceOjoDer >= ojoDer.length){
-            indiceOjoDer = 0;
-        }
+      let pointA = face.keypoints[pointAIndex];
+      let pointB = face.keypoints[pointBIndex];
+      let pointC = face.keypoints[pointCIndex];
 
+      noFill();
+      stroke(0, 0, 0);
+      strokeWeight(0);
+
+      triangle(
+        pointA.x, pointA.y,
+        pointB.x, pointB.y,
+        pointC.x, pointC.y
+      );
     }
 
-    let pomulo1 = face.keypoints[197];
-    if(
-        mouseX > pomulo1.x &&
-        mouseX < pomulo1.x + 180 &&
-        mouseY > pomulo1.y &&
-        mouseY < pomulo1.y + 60
-    ){
-        indicePomuloDer = (indicePomuloDer + 1) % pomuloDer.length;
-    }
+    let nariz = face.keypoints[5];
 
-    let menton1 = face.keypoints[0];
-     if(
-        mouseX > menton1.x &&
-        mouseX < menton1.x + 180 &&
-        mouseY > menton1.y &&
-        mouseY < menton1.y + 60
-    ){
-        indiceMentonDer = (indiceMentonDer + 1) % mentonDer.length;
-    }
-
-    let ojoIzq1 = face.keypoints[21];
-    if(
-        mouseX > ojoIzq1.x &&
-        mouseX < ojoIzq1.x + 180 &&
-        mouseY > ojoIzq1.y &&
-        mouseY < ojoIzq1.y + 60
-    ){
-        indiceOjoIzq = (indiceOjoIzq + 1) % ojoIzq.length;
-    }
-
-    let pomuloIzq1 = face.keypoints[116];
-    if(
-        mouseX > pomuloIzq1.x &&
-        mouseX < pomuloIzq1.x + 180 &&
-        mouseY > pomuloIzq1.y &&
-        mouseY < pomuloIzq1.y + 60
-    ){
-        indicePomuloIzq = (indicePomuloIzq + 1) % pomuloIzq.length;
-    }
-
-    let mentonIzq1 = face.keypoints[213];
-    if(
-        mouseX > mentonIzq1.x &&
-        mouseX < mentonIzq1.x + 180 &&
-        mouseY > mentonIzq1.y &&
-        mouseY < mentonIzq1.y + 60
-    ){
-        indiceMentonIzq = (indiceMentonIzq + 1) % mentonIzq.length;
-    }
-
-    
+    fill(255, 0, 0); // rojo
+    noStroke();
+    circle(nariz.x, nariz.y, 20);
+  }
 }
-    
 
-// falta crear cada mouse para cada rasgo
+function gotFaces(results) {
+  faces = results;
+}

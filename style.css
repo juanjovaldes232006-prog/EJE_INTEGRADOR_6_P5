@@ -1,32 +1,33 @@
 body{
-    background-color: hotpink;
-    font-family: 'Impact', sans-serif;
+margin: 0;
+overflow: hidden;
+background-color: #000;
+font-family: Impact, sans-serif;
+background-image: url(assets/5DB6C2F0-1294-4908-9244-A2E5B66ABCF0.png);
 }
 
-nav {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+
+nav{
+position: fixed;
+inset: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 100;
+pointer-events: none;
 }
 
-nav a {
-  margin-top: 52px;
-  padding: 45px 49px;
-  background-color: #000000;
-  color: hotpink;
-
-  text-decoration: none;
-  font-size: 100px;
-  letter-spacing: 23px;
-  text-transform: uppercase;
-  
-}
-
-nav a:hover {
-  background-color: rgb(250, 250, 250);
+nav a{
+pointer-events: auto;
+padding: 35px 45px;
+background: rgba(0,0,0,0.55);
+color: rgb(158, 149, 138);
+text-decoration: none;
+text-transform: uppercase;
+font-size: 90px;
+letter-spacing: 20px;
+line-height: 1.2;
+transition: .3s;
 }
 
     
